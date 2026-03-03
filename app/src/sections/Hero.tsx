@@ -115,7 +115,7 @@ export default function Hero() {
               className="btn-primary inline-flex items-center gap-2"
               onClick={(e) => {
                 e.preventDefault();
-                alert('Booking system coming soon! Call (506) 555-FADE to book.');
+                alert('Booking system coming soon! Call (639) 414-2877 to book.');
               }}
             >
               BOOK YOUR CUT
@@ -145,15 +145,15 @@ export default function Hero() {
           <div className="flex flex-wrap items-center justify-between gap-6 py-6 border-t border-white/10">
             <div className="flex items-center gap-2 text-white/70">
               <MapPin className="w-4 h-4 text-cherry" />
-              <span className="font-mono text-sm tracking-wide">MONCTON, NB</span>
+              <span className="font-mono text-sm tracking-wide">323 ST GEORGE ST, MONCTON NB</span>
             </div>
             <div className="flex items-center gap-2 text-white/70">
               <Clock className="w-4 h-4 text-cherry" />
-              <span className="font-mono text-sm tracking-wide">TUE-SAT 9-7</span>
+              <span className="font-mono text-sm tracking-wide">MON-SAT 10-6</span>
             </div>
             <div className="flex items-center gap-2 text-white/70">
               <Phone className="w-4 h-4 text-cherry" />
-              <span className="font-mono text-sm tracking-wide">(506) 555-FADE</span>
+              <span className="font-mono text-sm tracking-wide">(639) 414-2877</span>
             </div>
           </div>
         </div>

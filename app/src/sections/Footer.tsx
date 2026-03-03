@@ -18,7 +18,7 @@ const shopLinks = [
 const contactLinks = [
   { name: businessInfo.phone, href: `tel:${businessInfo.phone.replace(/\D/g, '')}` },
   { name: businessInfo.email, href: `mailto:${businessInfo.email}` },
-  { name: businessInfo.address, href: '#contact' },
+  { name: `${businessInfo.address}, ${businessInfo.city}`, href: '#contact' },
 ];
 
 export default function Footer() {
@@ -55,11 +55,11 @@ export default function Footer() {
               {/* Social Links */}
               <div className="flex items-center gap-4 mt-6">
                 <a
-                  href="https://instagram.com"
+                  href={businessInfo.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 text-white/60 hover:text-cherry hover:bg-white/5 rounded-sm transition-all duration-200"
-                  aria-label="Instagram"
+                  aria-label="Instagram @brae.blades"
                 >
                   <Instagram className="w-5 h-5" />
                 </a>
@@ -160,7 +160,7 @@ export default function Footer() {
               © {new Date().getFullYear()} {businessInfo.name}. All rights reserved.
             </p>
             <p className="font-mono text-xs text-white/40">
-              Moncton, New Brunswick, Canada
+              323 St George St, Moncton NB
             </p>
           </div>
         </div>

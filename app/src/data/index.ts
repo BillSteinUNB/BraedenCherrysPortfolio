@@ -124,21 +124,22 @@ export const teamMembers: TeamMember[] = [
 ];
 
 export const businessHours: BusinessHours[] = [
-  { day: 'Monday', hours: 'CLOSED', isOpen: false },
-  { day: 'Tuesday', hours: '9:00 AM – 7:00 PM', isOpen: true },
-  { day: 'Wednesday', hours: '9:00 AM – 7:00 PM', isOpen: true },
-  { day: 'Thursday', hours: '9:00 AM – 7:00 PM', isOpen: true },
-  { day: 'Friday', hours: '9:00 AM – 7:00 PM', isOpen: true },
-  { day: 'Saturday', hours: '9:00 AM – 5:00 PM', isOpen: true },
+  { day: 'Monday', hours: '10:00 AM - 6:00 PM', isOpen: true },
+  { day: 'Tuesday', hours: '10:00 AM - 6:00 PM', isOpen: true },
+  { day: 'Wednesday', hours: '10:00 AM - 6:00 PM', isOpen: true },
+  { day: 'Thursday', hours: '10:00 AM - 6:00 PM', isOpen: true },
+  { day: 'Friday', hours: '10:00 AM - 6:00 PM', isOpen: true },
+  { day: 'Saturday', hours: '10:00 AM - 6:00 PM', isOpen: true },
   { day: 'Sunday', hours: 'CLOSED', isOpen: false },
 ];
 
 export const businessInfo = {
   name: "Cherry's Barbershop",
-  address: '123 Main Street',
-  city: 'Moncton, NB E1C 1A1',
+  address: '323 St George St',
+  city: 'Moncton NB',
   country: 'Canada',
-  phone: '(506) 555-FADE',
-  email: 'hello@cherrysmoncton.com',
+  phone: '(639) 414-2877',
+  email: 'braeden@cherrysbarber.com',
+  instagram: 'https://instagram.com/brae.blades',
   bookingUrl: '#booking',
 };

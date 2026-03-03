@@ -86,7 +86,7 @@ export default function Services() {
             className="btn-primary inline-flex items-center gap-2"
             onClick={(e) => {
               e.preventDefault();
-              alert('Booking system coming soon! Call (506) 555-FADE to book.');
+              alert('Booking system coming soon! Call (639) 414-2877 to book.');
             }}
           >
             BOOK NOW
