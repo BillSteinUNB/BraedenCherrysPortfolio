@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useBooking } from '@/context/BookingContext';
 
 const navLinks = [
   { name: 'GALLERY', href: '#gallery' },
@@ -13,6 +14,7 @@ export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { totalItems, toggleCart } = useCart();
+  const { openBooking } = useBooking();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,16 +87,13 @@ export default function Navigation() {
               </button>
 
               {/* Book Button - Desktop */}
-              <a
-                href="#booking"
+              <button
+                type="button"
                 className="hidden md:block btn-primary text-sm tracking-wide"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector('#booking')?.scrollIntoView({ behavior: 'smooth' });
-                }}
+                onClick={openBooking}
               >
                 BOOK NOW
-              </a>
+              </button>
 
               {/* Mobile Menu Button */}
               <button
@@ -136,17 +135,16 @@ export default function Navigation() {
               {link.name}
             </button>
           ))}
-          <a
-            href="#booking"
+          <button
+            type="button"
             className="btn-primary mt-8 text-lg"
-            onClick={(e) => {
-              e.preventDefault();
+            onClick={() => {
               setIsMobileMenuOpen(false);
-              document.querySelector('#booking')?.scrollIntoView({ behavior: 'smooth' });
+              openBooking();
             }}
           >
             BOOK NOW
-          </a>
+          </button>
         </div>
       </div>
     </>

@@ -1,5 +1,6 @@
 import { Instagram, Facebook } from 'lucide-react';
 import { businessInfo } from '@/data';
+import { useBooking } from '@/context/BookingContext';
 
 const quickLinks = [
   { name: 'Gallery', href: '#gallery' },
@@ -22,7 +23,14 @@ const contactLinks = [
 ];
 
 export default function Footer() {
+  const { openBooking } = useBooking();
+
   const scrollToSection = (href: string) => {
+    if (href === '#booking') {
+      openBooking();
+      return;
+    }
+
     if (href.startsWith('#')) {
       const element = document.querySelector(href);
       if (element) {

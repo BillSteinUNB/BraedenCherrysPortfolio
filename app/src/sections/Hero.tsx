@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { Play, MapPin, Clock, Phone, ChevronDown } from 'lucide-react';
+import { useBooking } from '@/context/BookingContext';
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
+  const { openBooking } = useBooking();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
@@ -110,17 +112,14 @@ export default function Hero() {
             }`}
             style={{ transitionDelay: '0.9s', transitionTimingFunction: 'var(--ease-sharp)' }}
           >
-            <a
-              href="#booking"
+            <button
+              type="button"
               className="btn-primary inline-flex items-center gap-2"
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector('#booking')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={openBooking}
             >
               BOOK YOUR CUT
               <span className="text-lg">→</span>
-            </a>
+            </button>
             <button
               className="btn-outline inline-flex items-center gap-2"
               onClick={() => alert('Video coming soon!')}

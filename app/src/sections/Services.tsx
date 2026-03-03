@@ -1,8 +1,10 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { services } from '@/data';
+import { useBooking } from '@/context/BookingContext';
 
 export default function Services() {
   const { ref: sectionRef, isVisible } = useScrollAnimation<HTMLElement>();
+  const { openBooking } = useBooking();
 
   return (
     <section
@@ -81,17 +83,14 @@ export default function Services() {
             transitionTimingFunction: 'var(--ease-sharp)',
           }}
         >
-          <a
-            href="#booking"
+          <button
+            type="button"
             className="btn-primary inline-flex items-center gap-2"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector('#booking')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+            onClick={openBooking}
           >
             BOOK NOW
             <span className="text-lg">→</span>
-          </a>
+          </button>
         </div>
       </div>
     </section>
