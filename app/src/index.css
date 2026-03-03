@@ -257,7 +257,7 @@
   /* Make the Vagaro iframe fill the container */
   .vagaro-widget-container iframe {
     width: 100% !important;
-    min-height: 500px;
+    min-height: 70vh;
     border: none;
     display: block;
   }

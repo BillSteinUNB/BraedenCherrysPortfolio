@@ -185,7 +185,7 @@ export default function BookingModal() {
           className="fixed inset-0 z-50 !top-0 !left-0 !max-w-none !translate-x-0 !translate-y-0 !rounded-none !border-0 !bg-transparent !p-4 !shadow-none !outline-none sm:!p-6"
         >
           <div className="flex min-h-full w-full items-center justify-center py-6">
-            <div className="relative flex w-full max-w-3xl flex-col overflow-hidden rounded-sm border border-white/[0.06] bg-noir-elevated shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(196,30,58,0.06)] max-h-[90vh] animate-slide-up-fade">
+            <div className="relative flex w-full max-w-3xl lg:max-w-[85vw] xl:max-w-[80vw] flex-col overflow-hidden rounded-sm border border-white/[0.06] bg-noir-elevated shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(196,30,58,0.06)] max-h-[90vh] animate-slide-up-fade">
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cherry to-transparent" />
 
               <div className="flex items-start justify-between gap-6 border-b border-white/10 px-5 py-5 sm:px-8">
