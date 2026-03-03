@@ -234,7 +234,7 @@
 
   /* Vagaro Booking Widget */
   .vagaro-widget-frame {
-    min-height: 500px;
+    min-height: 0;
     position: relative;
     box-shadow:
       0 0 0 1px rgba(255, 255, 255, 0.04),
@@ -245,7 +245,7 @@
   .vagaro-widget-container {
     position: relative;
     z-index: 1;
-    min-height: 480px;
+    min-height: 0;
   }
   
   /* Hide the loading state once the widget iframe appears */
@@ -257,7 +257,7 @@
   /* Make the Vagaro iframe fill the container */
   .vagaro-widget-container iframe {
     width: 100% !important;
-    min-height: 80vh;
+    height: 100% !important;
     border: none;
     display: block;
   }
