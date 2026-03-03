@@ -231,6 +231,48 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Vagaro Booking Widget */
+  .vagaro-widget-frame {
+    min-height: 500px;
+    position: relative;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.04),
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      0 0 80px rgba(196, 30, 58, 0.06);
+  }
+  
+  .vagaro-widget-container {
+    position: relative;
+    z-index: 1;
+    min-height: 480px;
+  }
+  
+  /* Hide the loading state once the widget iframe appears */
+  .vagaro-widget-container:has(iframe) + .vagaro-widget-loading {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* Make the Vagaro iframe fill the container */
+  .vagaro-widget-container iframe {
+    width: 100% !important;
+    min-height: 600px;
+    border: none;
+    display: block;
+  }
+  
+  /* Hide the default frameTitle since we have our own header */
+  .vagaro-widget-container #frameTitle {
+    display: none;
+  }
+  
+  /* Subtle the Vagaro attribution links */
+  .vagaro-widget-container .vagaro {
+    padding: 12px 0 !important;
+    background: #f8f8f8;
+    border-top: 1px solid #eee;
+  }
 }
 
 @layer utilities {
