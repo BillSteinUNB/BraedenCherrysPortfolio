@@ -59,40 +59,43 @@ export default function Gallery() {
           </button>
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {galleryItems.map((item, index) => (
-            <div
-              key={item.id}
-              className={`cut-card aspect-[3/4] rounded-sm cursor-pointer group transition-all duration-700 ${
-                isVisible
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-12 opacity-0'
-              }`}
-              style={{
-                transitionDelay: `${index * 0.1}s`,
-                transitionTimingFunction: 'var(--ease-sharp)',
-              }}
-              onClick={() => openLightbox(index)}
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-              {/* Overlay Content */}
-              <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="font-mono text-xs text-white/60 tracking-ultra mb-1">
-                  {item.category.toUpperCase()}
-                </span>
-                <h3 className="font-display text-2xl text-white">
-                  {item.title}
-                </h3>
+        {/* Gallery Grid - Constrained width for smaller images */}
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+            {galleryItems.map((item, index) => (
+              <div
+                key={item.id}
+                className={`cut-card aspect-[4/3] rounded-sm cursor-pointer group transition-all duration-700 ${
+                  isVisible
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-12 opacity-0'
+                }`}
+                style={{
+                  transitionDelay: `${index * 0.1}s`,
+                  transitionTimingFunction: 'var(--ease-sharp)',
+                }}
+                onClick={() => openLightbox(index)}
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                {/* Overlay Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="font-mono text-xs text-white/60 tracking-ultra mb-1">
+                    {item.category.toUpperCase()}
+                  </span>
+                  <h3 className="font-display text-xl text-white">
+                    {item.title}
+                  </h3>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+
 
         {/* Mobile View All Button */}
         <div className="mt-8 text-center md:hidden">

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Play, MapPin, Clock, Phone, ChevronDown } from 'lucide-react';
+import { ShoppingBag, MapPin, Clock, Phone, ChevronDown } from 'lucide-react';
 import { useBooking } from '@/context/BookingContext';
 
 export default function Hero() {
@@ -12,8 +12,8 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
-  const scrollToGallery = () => {
-    const element = document.querySelector('#gallery');
+  const scrollToShop = () => {
+    const element = document.querySelector('#shop');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -122,10 +122,10 @@ export default function Hero() {
             </button>
             <button
               className="btn-outline inline-flex items-center gap-2"
-              onClick={() => alert('Video coming soon!')}
+              onClick={scrollToShop}
             >
-              <Play className="w-4 h-4" />
-              WATCH THE CRAFT
+              <ShoppingBag className="w-4 h-4" />
+              BUY PRODUCTS
             </button>
           </div>
         </div>
