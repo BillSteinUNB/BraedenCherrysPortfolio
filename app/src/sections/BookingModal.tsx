@@ -182,20 +182,20 @@ export default function BookingModal() {
         <DialogOverlay className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm data-[state=closed]:animate-fade-out data-[state=open]:animate-fade-in" />
         <DialogContent
           showCloseButton={false}
-          className="fixed inset-0 z-50 !top-0 !left-0 !max-w-none !translate-x-0 !translate-y-0 !rounded-none !border-0 !bg-transparent !p-4 !shadow-none !outline-none sm:!p-6"
+          className="fixed inset-0 z-50 !top-0 !left-0 !max-w-none !translate-x-0 !translate-y-0 !rounded-none !border-0 !bg-transparent !p-2 !shadow-none !outline-none sm:!p-3"
         >
-          <div className="flex min-h-full w-full items-center justify-center py-6">
-            <div className="relative flex w-full max-w-3xl lg:max-w-[85vw] xl:max-w-[80vw] flex-col overflow-hidden rounded-sm border border-white/[0.06] bg-noir-elevated shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(196,30,58,0.06)] max-h-[90vh] animate-slide-up-fade">
+          <div className="flex min-h-full w-full items-center justify-center py-2">
+            <div className="relative flex w-full max-w-4xl flex-col overflow-hidden rounded-sm border border-white/[0.06] bg-noir-elevated shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(196,30,58,0.06)] max-h-[96vh] animate-slide-up-fade">
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cherry to-transparent" />
 
-              <div className="flex items-start justify-between gap-6 border-b border-white/10 px-5 py-5 sm:px-8">
+              <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-3 sm:px-6">
                 <div>
-                  <div className="mb-3 inline-flex items-center gap-3">
+                  <div className="mb-1 inline-flex items-center gap-3">
                     <div className="h-px w-8 bg-cherry" />
                     <span className="font-mono text-xs uppercase tracking-ultra text-cherry">APPOINTMENTS</span>
                     <div className="h-px w-8 bg-cherry" />
                   </div>
-                  <DialogTitle className="font-display text-3xl tracking-tight text-white">BOOK YOUR CUT</DialogTitle>
+                  <DialogTitle className="font-display text-2xl tracking-tight text-white">BOOK YOUR CUT</DialogTitle>
                   <DialogDescription className="sr-only">
                     Schedule your appointment using the embedded Vagaro booking widget.
                   </DialogDescription>
@@ -212,17 +212,8 @@ export default function BookingModal() {
                 </DialogClose>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-3 sm:p-5">
+              <div className="flex-1 overflow-y-auto p-2 sm:p-3">
                 {isBookingOpen ? <VagaroWidget instanceKey={widgetInstanceKey} /> : null}
-              </div>
-
-              <div className="border-t border-white/10 px-5 py-4 text-center sm:px-8">
-                <p className="font-body text-sm text-white/40">
-                  Prefer to call?{' '}
-                  <a href="tel:6394142877" className="text-cherry transition-colors duration-200 hover:text-cherry-bright">
-                    (639) 414-2877
-                  </a>
-                </p>
               </div>
             </div>
           </div>
