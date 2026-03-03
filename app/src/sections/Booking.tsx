@@ -1,37 +1,62 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { Calendar } from 'lucide-react';
 
 const VAGARO_SCRIPT_SRC =
   'https://www.vagaro.com//resources/WidgetEmbeddedLoader/OZqqCZKnEJWcT3qmV35y79oz34mC2PeFJ4mC30m9dSycvCu7gevEhAJDXwOapcUbfY?v=XhhXr0v1haqd457gVaCoQgkDkWX7zDkTDWGPDVjYtss#';
+const BOOKING_FALLBACK_URL = 'https://www.vagaro.com/cherrysbarber';
 
 export default function Booking() {
   const { ref: sectionRef, isVisible } = useScrollAnimation<HTMLElement>();
   const widgetContainerRef = useRef<HTMLDivElement>(null);
+  const vagaroRootRef = useRef<HTMLDivElement>(null);
   const scriptLoadedRef = useRef(false);
+  const [widgetState, setWidgetState] = useState<'loading' | 'ready' | 'error'>('loading');
 
-  // Load Vagaro widget script
+  // Load Vagaro widget script.
   useEffect(() => {
-    if (scriptLoadedRef.current || !widgetContainerRef.current) return;
+    if (scriptLoadedRef.current || !widgetContainerRef.current || !vagaroRootRef.current) return;
 
     const container = widgetContainerRef.current;
+    const vagaroRoot = vagaroRootRef.current;
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = VAGARO_SCRIPT_SRC;
     script.async = true;
 
-    container.appendChild(script);
+    const observeIframe = () => {
+      const iframe = container.querySelector('iframe');
+      if (!iframe) return;
+
+      setWidgetState('ready');
+      iframe.addEventListener('load', () => setWidgetState('ready'), { once: true });
+    };
+
+    const iframeObserver = new MutationObserver(() => observeIframe());
+    iframeObserver.observe(container, { childList: true, subtree: true });
+
+    script.addEventListener('error', () => setWidgetState('error'));
+    setWidgetState('loading');
+    vagaroRoot.appendChild(script);
+    observeIframe();
     scriptLoadedRef.current = true;
 
+    const timeoutId = window.setTimeout(() => {
+      setWidgetState((current) => (current === 'loading' ? 'error' : current));
+    }, 15000);
+
     return () => {
-      if (container.contains(script)) {
-        container.removeChild(script);
+      window.clearTimeout(timeoutId);
+      iframeObserver.disconnect();
+
+      if (vagaroRoot.contains(script)) {
+        vagaroRoot.removeChild(script);
       }
       scriptLoadedRef.current = false;
     };
   }, []);
 
-  // Listen for Vagaro booking widget events
+  // Listen for Vagaro booking widget events.
   const handleVagaroMessage = useCallback((event: MessageEvent) => {
     if (event.origin !== 'https://www.vagaro.com') return;
 
@@ -42,7 +67,7 @@ export default function Booking() {
         console.log('[Cherry\'s] Booking completed:', message.data);
       }
     } catch {
-      // Silently ignore non-Vagaro messages
+      // Silently ignore non-Vagaro messages.
     }
   }, []);
 
@@ -107,7 +132,7 @@ export default function Booking() {
               ref={widgetContainerRef}
               className="vagaro-widget-container"
             >
-              {/* frameTitle div — Vagaro uses this for header text (left empty) */}
+              {/* frameTitle div - Vagaro uses this for header text (left empty). */}
               <div
                 id="frameTitle"
                 className="embedded-widget-title"
@@ -124,6 +149,7 @@ export default function Booking() {
 
               {/* Vagaro widget target */}
               <div
+                ref={vagaroRootRef}
                 className="vagaro"
                 style={{
                   width: '100%',
@@ -154,12 +180,38 @@ export default function Booking() {
               </div>
             </div>
 
-            {/* Loading state — shown until widget loads */}
-            <div className="vagaro-widget-loading absolute inset-0 flex flex-col items-center justify-center bg-white pointer-events-none transition-opacity duration-500">
-              <Calendar className="w-8 h-8 text-cherry/40 mb-3 animate-pulse" />
-              <span className="font-mono text-xs text-gray-400 tracking-wide">
-                LOADING BOOKING...
-              </span>
+            {/* Loading state - shown until widget loads. */}
+            <div
+              className={`vagaro-widget-loading absolute inset-0 flex flex-col items-center justify-center bg-white transition-opacity duration-500 ${
+                widgetState === 'ready'
+                  ? 'opacity-0 pointer-events-none'
+                  : widgetState === 'error'
+                    ? 'opacity-100 pointer-events-auto'
+                    : 'opacity-100 pointer-events-none'
+              }`}
+            >
+              {widgetState === 'error' ? (
+                <>
+                  <span className="font-mono text-xs text-gray-500 tracking-wide mb-4">
+                    BOOKING WIDGET UNAVAILABLE
+                  </span>
+                  <a
+                    href={BOOKING_FALLBACK_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center rounded-sm bg-cherry px-4 py-2 font-mono text-xs tracking-wide text-white hover:bg-cherry-bright transition-colors duration-200"
+                  >
+                    OPEN BOOKING PAGE
+                  </a>
+                </>
+              ) : (
+                <>
+                  <Calendar className="w-8 h-8 text-cherry/40 mb-3 animate-pulse" />
+                  <span className="font-mono text-xs text-gray-400 tracking-wide">
+                    LOADING BOOKING...
+                  </span>
+                </>
+              )}
             </div>
           </div>
 
