@@ -24,7 +24,7 @@ export default function Services() {
             SERVICES
           </h2>
           <p className="font-body text-gray-text mt-2">
-            The menu. Clean cuts, fair prices.
+            All prices include taxes.
           </p>
         </div>
 
