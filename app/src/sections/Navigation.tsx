@@ -90,7 +90,7 @@ export default function Navigation() {
                 className="hidden md:block btn-primary text-sm tracking-wide"
                 onClick={(e) => {
                   e.preventDefault();
-                  alert('Booking system coming soon! Call (639) 414-2877 to book.');
+                  document.querySelector('#booking')?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
                 BOOK NOW
@@ -142,7 +142,7 @@ export default function Navigation() {
             onClick={(e) => {
               e.preventDefault();
               setIsMobileMenuOpen(false);
-              alert('Booking system coming soon! Call (639) 414-2877 to book.');
+              document.querySelector('#booking')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
             BOOK NOW

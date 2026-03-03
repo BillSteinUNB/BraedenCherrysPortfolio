@@ -115,7 +115,7 @@ export default function Hero() {
               className="btn-primary inline-flex items-center gap-2"
               onClick={(e) => {
                 e.preventDefault();
-                alert('Booking system coming soon! Call (639) 414-2877 to book.');
+                document.querySelector('#booking')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
               BOOK YOUR CUT

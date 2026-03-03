@@ -141,5 +141,5 @@ export const businessInfo = {
   phone: '(639) 414-2877',
   email: 'braeden@cherrysbarber.com',
   instagram: 'https://instagram.com/brae.blades',
-  bookingUrl: '#booking',
+  bookingUrl: 'https://www.vagaro.com/cherrysbarber',
 };
