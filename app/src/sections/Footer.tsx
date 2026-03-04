@@ -175,8 +175,8 @@ export default function Footer() {
       </div>
 
       {/* Large Background Logo */}
-      <div className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none">
-        <div className="font-display text-[20vw] text-white/[0.02] whitespace-nowrap leading-none text-center translate-y-1/3">
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none">
+        <div className="font-display text-[20vw] text-white/[0.02] whitespace-nowrap leading-none text-center translate-y-1/3 w-full">
           CHERRY'S
         </div>
       </div>

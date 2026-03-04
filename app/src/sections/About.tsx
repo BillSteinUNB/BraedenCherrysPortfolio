@@ -12,23 +12,25 @@ export default function About() {
       <div className="w-full section-padding">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image */}
-          <div
-            className={`relative transition-all duration-700 ${
-              isVisible
-                ? 'translate-x-0 opacity-100'
-                : '-translate-x-12 opacity-0'
-            }`}
-            style={{ transitionTimingFunction: 'var(--ease-sharp)' }}
-          >
-            <div className="aspect-[3/2] rounded-sm overflow-hidden">
-              <img
-                src="/images/shop-interior.jpg"
-                alt="Cherry's Barbershop Interior"
-                className="w-full h-full object-cover"
-              />
+          <div className="overflow-hidden">
+            <div
+              className={`relative transition-all duration-700 ${
+                isVisible
+                  ? 'translate-x-0 opacity-100'
+                  : '-translate-x-12 opacity-0'
+              }`}
+              style={{ transitionTimingFunction: 'var(--ease-sharp)' }}
+            >
+              <div className="aspect-[3/2] rounded-sm overflow-hidden">
+                <img
+                  src="/images/shop-interior.jpg"
+                  alt="Cherry's Barbershop Interior"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Decorative element */}
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-cherry rounded-sm -z-10" />
             </div>
-            {/* Decorative element */}
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-cherry rounded-sm -z-10" />
           </div>
 
           {/* Content */}

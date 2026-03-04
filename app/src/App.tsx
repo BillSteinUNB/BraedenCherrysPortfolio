@@ -15,7 +15,7 @@ function App() {
   return (
     <CartProvider>
       <BookingProvider>
-        <div className="relative min-h-screen bg-noir-rich">
+        <div className="relative min-h-screen bg-noir-rich overflow-x-hidden">
           {/* Grain Overlay */}
           <div className="grain-overlay" />
 
