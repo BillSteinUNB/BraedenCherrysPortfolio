@@ -75,7 +75,7 @@ export default function Navigation() {
               {/* Cart Button */}
               <button
                 onClick={toggleCart}
-                className="relative p-2 text-white/80 hover:text-white transition-colors duration-200"
+                className="relative p-3 text-white/80 hover:text-white transition-colors duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label="Open cart"
               >
                 <ShoppingBag className="w-5 h-5" />
@@ -86,10 +86,10 @@ export default function Navigation() {
                 )}
               </button>
 
-              {/* Book Button - Desktop */}
+              {/* Book Button - Desktop & Mobile */}
               <button
                 type="button"
-                className="hidden md:block btn-primary text-sm tracking-wide"
+                className="btn-primary text-sm tracking-wide px-4 py-2 sm:px-8 sm:py-4"
                 onClick={openBooking}
               >
                 BOOK NOW
@@ -98,7 +98,7 @@ export default function Navigation() {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden p-2 text-white"
+                className="md:hidden p-3 text-white min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? (

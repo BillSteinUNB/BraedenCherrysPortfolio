@@ -112,10 +112,10 @@ export default function Gallery() {
           {/* Close Button */}
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 p-2 text-white/60 hover:text-white transition-colors z-10"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 p-3 text-white/60 hover:text-white transition-colors z-10 min-w-[44px] min-h-[44px] flex items-center justify-center"
             aria-label="Close lightbox"
           >
-            <X className="w-8 h-8" />
+            <X className="w-6 h-6 sm:w-8 sm:h-8" />
           </button>
 
           {/* Navigation */}
@@ -142,7 +142,7 @@ export default function Gallery() {
 
           {/* Image */}
           <div
-            className="max-w-4xl max-h-[80vh] px-16"
+            className="max-w-4xl max-h-[80vh] px-4 sm:px-16"
             onClick={(e) => e.stopPropagation()}
           >
             <img
@@ -154,7 +154,7 @@ export default function Gallery() {
               <span className="font-mono text-xs text-white/60 tracking-ultra">
                 {galleryItems[selectedImage].category.toUpperCase()}
               </span>
-              <h3 className="font-display text-2xl text-white mt-1">
+              <h3 className="font-display text-xl sm:text-2xl text-white mt-1">
                 {galleryItems[selectedImage].title}
               </h3>
             </div>

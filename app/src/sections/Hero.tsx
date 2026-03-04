@@ -19,6 +19,12 @@ export default function Hero() {
     }
   };
 
+  const scrollToGallery = () => {
+    const element = document.querySelector('#gallery');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <section
       ref={heroRef}

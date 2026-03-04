@@ -141,7 +141,7 @@ function VagaroWidget({ instanceKey }: { instanceKey: number }) {
               href={BOOKING_FALLBACK_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center rounded-sm bg-cherry px-4 py-2 font-mono text-xs tracking-wide text-white transition-colors duration-200 hover:bg-cherry-bright"
+              className="inline-flex items-center rounded-sm bg-cherry px-6 py-3 font-mono text-sm tracking-wide text-white transition-colors duration-200 hover:bg-cherry-bright min-h-[44px]"
             >
               OPEN BOOKING PAGE
             </a>
@@ -184,18 +184,18 @@ export default function BookingModal() {
           showCloseButton={false}
           className="fixed inset-0 z-50 !top-0 !left-0 !max-w-none !translate-x-0 !translate-y-0 !rounded-none !border-0 !bg-transparent !p-0 !shadow-none !outline-none"
         >
-          <div className="flex h-full w-full items-center justify-center">
-            <div className="relative flex w-full max-w-4xl h-[96vh] flex-col overflow-hidden rounded-sm border border-white/[0.06] bg-noir-elevated shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(196,30,58,0.06)] animate-slide-up-fade">
+          <div className="flex h-full w-full items-center justify-center p-2 sm:p-4">
+            <div className="relative flex w-full max-w-4xl h-[100vh] sm:h-[96vh] max-sm:rounded-none flex-col overflow-hidden rounded-sm border border-white/[0.06] bg-noir-elevated shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(196,30,58,0.06)] animate-slide-up-fade">
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cherry to-transparent" />
 
-              <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-3 sm:px-6">
+              <div className="flex items-center justify-between gap-2 sm:gap-4 border-b border-white/10 px-3 py-2 sm:px-6 sm:py-3">
                 <div>
-                  <div className="mb-1 inline-flex items-center gap-3">
-                    <div className="h-px w-8 bg-cherry" />
-                    <span className="font-mono text-xs uppercase tracking-ultra text-cherry">APPOINTMENTS</span>
-                    <div className="h-px w-8 bg-cherry" />
+                  <div className="mb-1 inline-flex items-center gap-2 sm:gap-3">
+                    <div className="h-px w-4 sm:w-8 bg-cherry" />
+                    <span className="font-mono text-[10px] sm:text-xs uppercase tracking-ultra text-cherry">APPOINTMENTS</span>
+                    <div className="h-px w-4 sm:w-8 bg-cherry" />
                   </div>
-                  <DialogTitle className="font-display text-2xl tracking-tight text-white">BOOK YOUR CUT</DialogTitle>
+                  <DialogTitle className="font-display text-xl sm:text-2xl tracking-tight text-white">BOOK YOUR CUT</DialogTitle>
                   <DialogDescription className="sr-only">
                     Schedule your appointment using the embedded Vagaro booking widget.
                   </DialogDescription>
@@ -204,7 +204,7 @@ export default function BookingModal() {
                 <DialogClose asChild>
                   <button
                     type="button"
-                    className="rounded-sm p-2 text-white/60 transition-all duration-200 hover:bg-white/5 hover:text-white"
+                    className="rounded-sm p-3 text-white/60 transition-all duration-200 hover:bg-white/5 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center"
                     aria-label="Close booking modal"
                   >
                     <X className="h-5 w-5" />
