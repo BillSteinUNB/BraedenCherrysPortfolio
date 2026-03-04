@@ -25,8 +25,8 @@ export default function Gallery() {
           ? galleryItems.length - 1
           : selectedImage - 1
         : selectedImage === galleryItems.length - 1
-        ? 0
-        : selectedImage + 1;
+          ? 0
+          : selectedImage + 1;
     setSelectedImage(newIndex);
   };
 
@@ -59,41 +59,39 @@ export default function Gallery() {
           </button>
         </div>
 
-        {/* Gallery Grid - Constrained width for smaller images */}
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-            {galleryItems.map((item, index) => (
-              <div
-                key={item.id}
-                className={`cut-card aspect-[4/3] rounded-sm cursor-pointer group transition-all duration-700 ${
-                  isVisible
-                    ? 'translate-y-0 opacity-100'
-                    : 'translate-y-12 opacity-0'
-                }`}
-                style={{
-                  transitionDelay: `${index * 0.1}s`,
-                  transitionTimingFunction: 'var(--ease-sharp)',
-                }}
-                onClick={() => openLightbox(index)}
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                {/* Overlay Content */}
-                <div className="absolute inset-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="font-mono text-xs text-white/60 tracking-ultra mb-1">
-                    {item.category.toUpperCase()}
-                  </span>
-                  <h3 className="font-display text-xl text-white">
-                    {item.title}
-                  </h3>
-                </div>
+        {/* Gallery Grid */}
+        <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
+          {galleryItems.map((item, index) => (
+            <div
+              key={item.id}
+              className={`cut-card aspect-[3/4] rounded-sm cursor-pointer group transition-all duration-700 ${
+                isVisible
+                  ? 'translate-y-0 opacity-100'
+                  : 'translate-y-12 opacity-0'
+              }`}
+              style={{
+                transitionDelay: `${index * 0.1}s`,
+                transitionTimingFunction: 'var(--ease-sharp)',
+              }}
+              onClick={() => openLightbox(index)}
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              {/* Overlay Content */}
+              <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="font-mono text-xs text-white/60 tracking-ultra mb-1">
+                  {item.category.toUpperCase()}
+                </span>
+                <h3 className="font-display text-2xl text-white">
+                  {item.title}
+                </h3>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
 
