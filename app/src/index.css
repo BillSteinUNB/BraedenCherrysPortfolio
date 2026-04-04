@@ -254,10 +254,16 @@
     pointer-events: none;
   }
   
-  /* Make the Vagaro iframe fill the container */
+  /*
+   * Vagaro's booking document only paints the flow at the top of the frame. Forcing the iframe to
+   * height: 100% of a full-screen dialog stretches the iframe element to ~90vh while the interior
+   * stays short, so users see a large empty white region inside the frame (not a loading failure).
+   * Use a tall but bounded height so steps like calendar/staff still fit; scroll remains inside the iframe.
+   */
   .vagaro-widget-container iframe {
     width: 100% !important;
-    height: 100% !important;
+    min-height: 480px;
+    height: min(78vh, 820px) !important;
     border: none;
     display: block;
   }

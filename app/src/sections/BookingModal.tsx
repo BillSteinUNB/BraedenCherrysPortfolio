@@ -82,10 +82,10 @@ function VagaroWidget({ instanceKey }: { instanceKey: number }) {
   }, [handleVagaroMessage]);
 
   return (
-    <div className="vagaro-widget-frame relative h-full overflow-hidden rounded-sm border border-white/[0.06] bg-white">
+    <div className="vagaro-widget-frame relative w-full overflow-hidden rounded-sm border border-white/[0.06] bg-white">
       <div className="absolute top-0 left-0 right-0 z-[2] h-[2px] bg-gradient-to-r from-transparent via-cherry to-transparent" />
 
-      <div ref={widgetContainerRef} className="vagaro-widget-container h-full">
+      <div ref={widgetContainerRef} className="vagaro-widget-container w-full">
         <div
           id="frameTitle"
           className="embedded-widget-title"
@@ -185,7 +185,7 @@ export default function BookingModal() {
           className="fixed inset-0 z-50 !top-0 !left-0 !max-w-none !translate-x-0 !translate-y-0 !rounded-none !border-0 !bg-transparent !p-0 !shadow-none !outline-none"
         >
           <div className="flex h-full w-full items-center justify-center p-2 sm:p-4">
-            <div className="relative flex w-full max-w-4xl h-[100vh] sm:h-[96vh] max-sm:rounded-none flex-col overflow-hidden rounded-sm border border-white/[0.06] bg-noir-elevated shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(196,30,58,0.06)] animate-slide-up-fade">
+            <div className="relative flex w-full max-w-4xl max-h-[100vh] sm:max-h-[96vh] max-sm:rounded-none flex-col overflow-hidden rounded-sm border border-white/[0.06] bg-noir-elevated shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_20px_60px_rgba(0,0,0,0.5),0_0_80px_rgba(196,30,58,0.06)] animate-slide-up-fade">
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cherry to-transparent" />
 
               <div className="flex items-center justify-between gap-2 sm:gap-4 border-b border-white/10 px-3 py-2 sm:px-6 sm:py-3">
@@ -212,7 +212,7 @@ export default function BookingModal() {
                 </DialogClose>
               </div>
 
-              <div className="flex-1 min-h-0 overflow-hidden">
+              <div className="min-h-0 overflow-y-auto">
                 {isBookingOpen ? <VagaroWidget instanceKey={widgetInstanceKey} /> : null}
               </div>
             </div>
