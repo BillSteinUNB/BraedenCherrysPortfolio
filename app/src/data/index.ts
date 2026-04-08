@@ -40,13 +40,13 @@ export const services: Service[] = [
     id: 'haircut',
     name: 'HAIRCUT',
     description: '45 minute appointment',
-    price: 30,
+    price: 35,
   },
   {
     id: 'student-haircut',
     name: 'STUDENT HAIRCUT',
     description: '45 minute appointment',
-    price: 25,
+    price: 30,
   },
   {
     id: 'buzzcut',
@@ -142,4 +142,5 @@ export const businessInfo = {
   email: 'braeden@cherrysbarber.com',
   instagram: 'https://instagram.com/brae.blades',
   bookingUrl: 'https://www.vagaro.com/cherrysbarber',
+  shopUrl: 'https://www.vagaro.com/cherrysbarber',
 };

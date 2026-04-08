@@ -4,6 +4,16 @@ import { businessInfo, businessHours } from '@/data';
 
 export default function Contact() {
   const { ref: sectionRef, isVisible } = useScrollAnimation<HTMLElement>();
+  const mapQuery = encodeURIComponent(
+    `${businessInfo.address}, ${businessInfo.city}, ${businessInfo.country}`
+  );
+  const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapQuery}&z=16&output=embed`;
+  const isAppleDevice =
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const mapsDirectionsUrl = isAppleDevice
+    ? `https://maps.apple.com/?q=${mapQuery}`
+    : `https://maps.google.com/?q=${mapQuery}`;
 
   const getTodayHours = () => {
     const today = new Date().getDay();
@@ -36,30 +46,59 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Map */}
           <div
-            className={`relative aspect-[4/3] lg:aspect-auto lg:min-h-[400px] rounded-sm overflow-hidden bg-noir-elevated transition-all duration-700 ${
+            className={`transition-all duration-700 ${
               isVisible
                 ? 'translate-x-0 opacity-100'
                 : '-translate-x-12 opacity-0'
             }`}
             style={{ transitionTimingFunction: 'var(--ease-sharp)' }}
           >
-            {/* Static Map Representation */}
-            <div className="absolute inset-0 bg-gradient-to-br from-noir-elevated to-noir-border flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="w-16 h-16 text-cherry mx-auto mb-4" />
-                <p className="font-display text-2xl text-white">
-                  {businessInfo.city}
-                </p>
-                <p className="font-body text-gray-text mt-2">
-                  {businessInfo.address}
-                </p>
+            <div className="overflow-hidden rounded-sm border border-white/[0.06] bg-noir-elevated shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_20px_60px_rgba(0,0,0,0.3)]">
+              <div className="relative aspect-[4/3] lg:min-h-[400px]">
+                <iframe
+                  title={`${businessInfo.name} map`}
+                  src={mapsEmbedUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full border-0"
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/55 to-transparent" />
+                <a
+                  href={mapsDirectionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-sm bg-black/70 px-3 py-2 backdrop-blur-sm transition-colors duration-200 hover:bg-black/85"
+                >
+                  <MapPin className="h-4 w-4 text-cherry" />
+                  <span className="font-mono text-xs tracking-wide text-white/90">
+                    {businessInfo.address}
+                  </span>
+                </a>
               </div>
-            </div>
-            {/* Map Pin */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full">
-              <div className="relative">
-                <div className="w-4 h-4 bg-cherry rounded-full animate-ping absolute" />
-                <div className="w-4 h-4 bg-cherry rounded-full relative" />
+              <div className="flex items-center justify-between gap-4 border-t border-white/10 bg-noir-elevated px-4 py-4">
+                <div className="min-w-0">
+                  <p className="font-display text-lg text-white">
+                    {businessInfo.city}
+                  </p>
+                  <a
+                    href={mapsDirectionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body text-sm text-gray-text transition-colors duration-200 hover:text-cherry"
+                  >
+                    {businessInfo.address}
+                  </a>
+                </div>
+                <a
+                  href={mapsDirectionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline inline-flex shrink-0 items-center gap-2"
+                >
+                  OPEN IN MAPS
+                  <ExternalLink className="h-4 w-4" />
+                </a>
               </div>
             </div>
           </div>
@@ -143,9 +182,7 @@ export default function Contact() {
 
               {/* Directions CTA */}
               <a
-                href={`https://maps.google.com/?q=${encodeURIComponent(
-                  `${businessInfo.address} ${businessInfo.city}`
-                )}`}
+                href={mapsDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline inline-flex items-center gap-2"

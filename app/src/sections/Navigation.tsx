@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ShoppingBag } from 'lucide-react';
-import { useCart } from '@/context/CartContext';
+import { Menu, X } from 'lucide-react';
 import { useBooking } from '@/context/BookingContext';
 
 const navLinks = [
@@ -13,7 +12,6 @@ const navLinks = [
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { totalItems, toggleCart } = useCart();
   const { openBooking } = useBooking();
 
   useEffect(() => {
@@ -72,20 +70,6 @@ export default function Navigation() {
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-4">
-              {/* Cart Button */}
-              <button
-                onClick={toggleCart}
-                className="relative p-3 text-white/80 hover:text-white transition-colors duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
-                aria-label="Open cart"
-              >
-                <ShoppingBag className="w-5 h-5" />
-                {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-cherry text-white text-xs font-mono rounded-full flex items-center justify-center animate-scale-in">
-                    {totalItems}
-                  </span>
-                )}
-              </button>
-
               {/* Book Button - Desktop & Mobile */}
               <button
                 type="button"

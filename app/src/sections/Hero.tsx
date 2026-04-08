@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { ShoppingBag, MapPin, Clock, Phone, ChevronDown } from 'lucide-react';
+import { MapPin, Clock, Phone, ChevronDown } from 'lucide-react';
 import { useBooking } from '@/context/BookingContext';
 
 export default function Hero() {
@@ -130,8 +130,8 @@ export default function Hero() {
               className="btn-outline inline-flex items-center gap-2"
               onClick={scrollToShop}
             >
-              <ShoppingBag className="w-4 h-4" />
-              BUY PRODUCTS
+              VIEW PRODUCTS
+              <span className="text-lg">→</span>
             </button>
           </div>
         </div>
