@@ -1,4 +1,3 @@
-import { ExternalLink } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export default function About() {
@@ -69,20 +68,6 @@ export default function About() {
               >
                 <source src="/videos/cherrys-barber-ad.mp4" type="video/mp4" />
               </video>
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-black/10" />
-
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-4">
-                <span className="font-mono text-[10px] uppercase tracking-ultra text-white/65">
-                  Video spot
-                </span>
-                <a
-                  href="/videos/cherrys-barber-ad.mp4"
-                  className="inline-flex items-center gap-2 border border-white/15 bg-black/45 px-3 py-2 font-mono text-[10px] uppercase tracking-wide text-white/75 backdrop-blur transition-colors duration-200 hover:border-cherry hover:text-white"
-                >
-                  Watch spot
-                  <ExternalLink className="size-3" />
-                </a>
-              </div>
 
               <div className="absolute -bottom-4 -right-4 -z-10 hidden h-24 w-24 border-2 border-cherry md:block" />
             </div>
