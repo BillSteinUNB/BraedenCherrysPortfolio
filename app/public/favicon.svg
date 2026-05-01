@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <title>Cherry's Barbershop</title>
-  <rect width="64" height="64" rx="14" fill="#050505"/>
   <g transform="translate(32 32) scale(0.82) translate(-32 -32)" stroke-linecap="round" stroke-linejoin="round">
     <path d="M32 5c-6.5 0-11 4.6-11 11v2h22v-2C43 9.6 38.5 5 32 5Z" fill="none" stroke="#ef3340" stroke-width="4"/>
     <path d="M22 18h21v35H22z" fill="#fff" stroke="#ef3340" stroke-width="4"/>
