@@ -1,0 +1,18 @@
+## Build output
+app/dist/
+
+## Dependencies
+app/node_modules/
+node_modules/
+
+## Local spreadsheets (not part of site)
+*.xls
+*.xlsx
+*.xlsm
+
+## OS / editor junk
+.DS_Store
+Thumbs.db
+
+## Cursor / tooling
+.cursor/
