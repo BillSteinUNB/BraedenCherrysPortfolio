@@ -56,9 +56,9 @@ export default function About() {
             }`}
             style={{ transitionTimingFunction: 'var(--ease-sharp)' }}
           >
-            <div className="relative h-[56vh] w-full overflow-hidden border-y border-white/10 bg-noir-elevated md:min-h-screen md:border-y-0 md:border-l md:shadow-lift">
+            <div className="relative h-[56vh] w-full overflow-hidden border-y border-white/10 bg-black md:min-h-screen md:border-y-0 md:border-l md:shadow-lift">
               <video
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain"
                 autoPlay
                 muted
                 loop

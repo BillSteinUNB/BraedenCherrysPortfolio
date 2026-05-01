@@ -3,53 +3,107 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { products } from '@/data';
 import { cn } from '@/lib/utils';
+import type { Product } from '@/types';
 
-const ALL = 'All';
+const familyDefinitions = [
+  { id: 'beard-balm', category: 'Beard Balm', label: 'Beard Balm' },
+  { id: 'beard-body-wash', category: 'Wash', label: 'Beard Body Wash' },
+  { id: 'beard-oil', category: 'Beard Oil', label: 'Beard Oil' },
+  { id: 'fiber-cream', category: 'Styling Cream', label: 'Fiber Cream' },
+  { id: 'pomade', category: 'Pomade', label: 'Pomade' },
+] as const;
+
+interface ProductFamily {
+  id: string;
+  label: string;
+  products: Product[];
+}
+
+function getScentClass(scent?: string) {
+  if (!scent) return 'text-gray-text';
+
+  const normalizedScent = scent.toLowerCase();
+
+  if (normalizedScent.includes('bergamot') || normalizedScent.includes('grapefruit')) {
+    return 'text-[#f4a261]';
+  }
+
+  if (normalizedScent.includes('peppermint') || normalizedScent.includes('cedarwood')) {
+    return 'text-[#9be7c4]';
+  }
+
+  if (normalizedScent.includes('eclipse')) {
+    return 'text-[#8f6bdc]';
+  }
+
+  return 'text-gray-text';
+}
 
 export default function Shop() {
-  const [activeCategory, setActiveCategory] = useState(ALL);
+  const [variantIndexes, setVariantIndexes] = useState<Record<string, number>>({});
   const [selectedProductId, setSelectedProductId] = useState(products[0]?.id);
   const { ref: sectionRef, isVisible } = useScrollAnimation<HTMLElement>();
 
   const brands = useMemo(
-    () => [ALL, ...Array.from(new Set(products.map((product) => product.brand)))],
+    () => Array.from(new Set(products.map((product) => product.brand))),
     []
   );
 
-  const categories = useMemo(
-    () => [ALL, ...Array.from(new Set(products.map((product) => product.category)))],
-    []
-  );
-
-  const filteredProducts = useMemo(
+  const productFamilies = useMemo<ProductFamily[]>(
     () =>
-      products.filter((product) => {
-        const categoryMatch =
-          activeCategory === ALL || product.category === activeCategory;
+      familyDefinitions.map((family) => ({
+        id: family.id,
+        label: family.label,
+        products: products.filter((product) => product.category === family.category),
+      })),
+    []
+  );
 
-        return categoryMatch;
-      }),
-    [activeCategory]
+  const visibleProducts = useMemo(
+    () =>
+      productFamilies
+        .map((family) => {
+          const activeIndex = variantIndexes[family.id] ?? 0;
+          return family.products[activeIndex] ?? family.products[0];
+        })
+        .filter(Boolean),
+    [productFamilies, variantIndexes]
   );
 
   const selectedProduct =
-    filteredProducts.find((product) => product.id === selectedProductId) ??
-    filteredProducts[0] ??
+    visibleProducts.find((product) => product.id === selectedProductId) ??
+    visibleProducts[0] ??
     products[0];
 
   const selectedIndex = Math.max(
-    filteredProducts.findIndex((product) => product.id === selectedProduct.id),
+    visibleProducts.findIndex((product) => product.id === selectedProduct.id),
     0
   );
 
   const navigateFeatured = (direction: 'previous' | 'next') => {
-    if (!filteredProducts.length) return;
+    if (!visibleProducts.length) return;
 
     const offset = direction === 'previous' ? -1 : 1;
     const nextIndex =
-      (selectedIndex + offset + filteredProducts.length) % filteredProducts.length;
+      (selectedIndex + offset + visibleProducts.length) % visibleProducts.length;
 
-    setSelectedProductId(filteredProducts[nextIndex].id);
+    setSelectedProductId(visibleProducts[nextIndex].id);
+  };
+
+  const navigateFamilyVariant = (family: ProductFamily, direction: 'previous' | 'next') => {
+    if (family.products.length < 2) return;
+
+    const currentIndex = variantIndexes[family.id] ?? 0;
+    const offset = direction === 'previous' ? -1 : 1;
+    const nextIndex =
+      (currentIndex + offset + family.products.length) % family.products.length;
+    const nextProduct = family.products[nextIndex];
+
+    setVariantIndexes((current) => ({
+      ...current,
+      [family.id]: nextIndex,
+    }));
+    setSelectedProductId(nextProduct.id);
   };
 
   return (
@@ -72,7 +126,7 @@ export default function Shop() {
                 Shelf lineup
               </span>
               <h2 className="mt-2 font-display text-display text-white">
-                THE SHOP
+                OUR PRODUCTS
               </h2>
               <p className="mt-3 max-w-xl font-body text-sm leading-6 text-gray-text md:text-base">
                 A rotating in-shop product shelf featuring beard care from
@@ -91,7 +145,7 @@ export default function Shop() {
               </div>
               <div>
                 <span className="font-mono text-2xl text-white">
-                  {brands.length - 1}
+                  {brands.length}
                 </span>
                 <p className="mt-1 font-mono text-[10px] uppercase tracking-ultra text-white/45">
                   Brands
@@ -99,24 +153,6 @@ export default function Shop() {
               </div>
             </div>
           </div>
-        </div>
-
-        <div
-          className={cn(
-            'mb-8 space-y-4 transition-all duration-700',
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          )}
-          style={{
-            transitionDelay: '0.08s',
-            transitionTimingFunction: 'var(--ease-sharp)',
-          }}
-        >
-          <FilterGroup
-            label="Type"
-            values={categories}
-            activeValue={activeCategory}
-            onChange={setActiveCategory}
-          />
         </div>
 
         <div
@@ -155,14 +191,19 @@ export default function Shop() {
                     {selectedProduct.name}
                   </h3>
                   {selectedProduct.scent && (
-                    <p className="mt-2 font-body text-lg text-white/75">
+                    <p
+                      className={cn(
+                        'mt-2 font-body text-lg',
+                        getScentClass(selectedProduct.scent)
+                      )}
+                    >
                       {selectedProduct.scent}
                     </p>
                   )}
                 </div>
                 <div className="shrink-0 text-right font-mono text-xs text-white/35">
                   {String(selectedIndex + 1).padStart(2, '0')} /{' '}
-                  {String(filteredProducts.length).padStart(2, '0')}
+                  {String(visibleProducts.length).padStart(2, '0')}
                 </div>
               </div>
 
@@ -207,9 +248,16 @@ export default function Shop() {
         </div>
 
         <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {filteredProducts.map((product, index) => (
+          {productFamilies.map((family, index) => {
+            const product =
+              family.products[variantIndexes[family.id] ?? 0] ?? family.products[0];
+            const hasVariants = family.products.length > 1;
+
+            if (!product) return null;
+
+            return (
             <button
-              key={product.id}
+              key={family.id}
               type="button"
               className={cn(
                 'group flex min-h-[275px] flex-col overflow-hidden border bg-noir-elevated text-left transition-all duration-500',
@@ -224,7 +272,49 @@ export default function Shop() {
               }}
               onClick={() => setSelectedProductId(product.id)}
             >
-              <div className="flex h-40 items-center justify-center bg-[radial-gradient(circle_at_50%_15%,rgba(255,255,255,0.16),rgba(255,255,255,0.03)_60%,rgba(0,0,0,0)_100%)] p-5">
+              <div className="relative flex h-40 items-center justify-center bg-[radial-gradient(circle_at_50%_15%,rgba(255,255,255,0.16),rgba(255,255,255,0.03)_60%,rgba(0,0,0,0)_100%)] p-5">
+                {hasVariants && (
+                  <>
+                    <span
+                      role="button"
+                      tabIndex={0}
+                      className="absolute left-2 top-1/2 z-10 flex size-8 -translate-y-1/2 items-center justify-center border border-white/10 bg-black/35 text-white/55 transition-colors duration-200 hover:border-white/30 hover:bg-black/60 hover:text-white"
+                      aria-label={`Previous ${family.label} variant`}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        navigateFamilyVariant(family, 'previous');
+                      }}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          navigateFamilyVariant(family, 'previous');
+                        }
+                      }}
+                    >
+                      <ChevronLeft className="size-4" />
+                    </span>
+                    <span
+                      role="button"
+                      tabIndex={0}
+                      className="absolute right-2 top-1/2 z-10 flex size-8 -translate-y-1/2 items-center justify-center border border-white/10 bg-black/35 text-white/55 transition-colors duration-200 hover:border-white/30 hover:bg-black/60 hover:text-white"
+                      aria-label={`Next ${family.label} variant`}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        navigateFamilyVariant(family, 'next');
+                      }}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          navigateFamilyVariant(family, 'next');
+                        }
+                      }}
+                    >
+                      <ChevronRight className="size-4" />
+                    </span>
+                  </>
+                )}
                 <img
                   src={product.image}
                   alt={`${product.brand} ${product.name}${
@@ -241,56 +331,30 @@ export default function Shop() {
                     {product.brand}
                   </p>
                   <h4 className="mt-2 font-display text-xl text-white">
-                    {product.name}
+                    {family.label}
                   </h4>
-                  {product.scent && (
-                    <p className="mt-1 font-body text-xs leading-5 text-gray-text">
-                      {product.scent}
+                  {(product.scent || product.name !== family.label) && (
+                    <p
+                      className={cn(
+                        'mt-1 font-body text-xs leading-5',
+                        getScentClass(product.scent)
+                      )}
+                    >
+                      {product.scent ?? product.name}
                     </p>
                   )}
                 </div>
                 <p className="mt-4 font-mono text-[10px] uppercase tracking-wide text-cherry">
-                  {product.category}
+                  {hasVariants
+                    ? `${(variantIndexes[family.id] ?? 0) + 1} / ${family.products.length}`
+                    : product.finish ?? product.category}
                 </p>
               </div>
             </button>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
-  );
-}
-
-interface FilterGroupProps {
-  label: string;
-  values: string[];
-  activeValue: string;
-  onChange: (value: string) => void;
-}
-
-function FilterGroup({ label, values, activeValue, onChange }: FilterGroupProps) {
-  return (
-    <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-      <span className="w-16 font-mono text-[10px] uppercase tracking-ultra text-white/35">
-        {label}
-      </span>
-      <div className="flex gap-2 overflow-x-auto pb-1">
-        {values.map((value) => (
-          <button
-            key={value}
-            type="button"
-            className={cn(
-              'shrink-0 border px-3 py-2 font-mono text-xs uppercase tracking-wide transition-colors duration-200',
-              value === activeValue
-                ? 'border-cherry bg-cherry text-white'
-                : 'border-white/10 bg-white/[0.03] text-white/55 hover:border-white/25 hover:text-white'
-            )}
-            onClick={() => onChange(value)}
-          >
-            {value}
-          </button>
-        ))}
-      </div>
-    </div>
   );
 }
