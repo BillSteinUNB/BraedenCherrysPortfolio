@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Cherry's Barbershop</title>
+  <rect width="64" height="64" rx="14" fill="#050505"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 5c-6.5 0-11 4.6-11 11v2h22v-2C43 9.6 38.5 5 32 5Z" fill="none" stroke="#ef3340" stroke-width="4"/>
+    <path d="M22 18h21v35H22z" fill="#fff" stroke="#ef3340" stroke-width="4"/>
+    <path d="M22 26 43 16M22 40 43 30M22 54 43 44" stroke="#050505" stroke-width="7"/>
+    <path d="M21 53c0 4.3 4 7 11 7s11-2.7 11-7" fill="none" stroke="#ef3340" stroke-width="3"/>
+    <path d="M20 27c-4.7 1.2-9.4 5.4-12 11.2-2 4.5-2.2 9.8-2.2 9.8s5.2-.2 9.8-2.4c5.9-2.7 9.5-7 10.6-11.5" fill="#ef3340" stroke="#ef3340" stroke-width="2"/>
+    <path d="M11 44c4.6-3.5 8-7.5 10.5-12" fill="none" stroke="#951b27" stroke-width="1.8"/>
+    <path d="M22 32c4 4.4 7.2 10 8.2 17" fill="none" stroke="#ef3340" stroke-width="3"/>
+    <path d="M43 32c-4 4.4-7.2 10-8.2 17" fill="none" stroke="#ef3340" stroke-width="3"/>
+    <circle cx="24" cy="51" r="10" fill="#ef3340" stroke="#ef3340" stroke-width="2"/>
+    <circle cx="43" cy="50" r="10" fill="#ef3340" stroke="#ef3340" stroke-width="2"/>
+    <path d="M29 45c-2.3-2.2-5.8-2.5-8.4-.8" fill="none" stroke="#ff6b70" stroke-width="1.8"/>
+    <path d="M49 44c2.4 1.5 4 3.8 4.4 6.4" fill="none" stroke="#ffb2b4" stroke-width="1.8"/>
+  </g>
+</svg>
