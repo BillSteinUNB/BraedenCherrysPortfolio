@@ -1,7 +1,27 @@
+import { useEffect, useState } from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
+const desktopVideoSrc = '/videos/cherrys-barber-ad.mp4';
+const mobileVideoSrc = '/videos/cherrys-barber-ad-1080p.mp4';
+const desktopVideoQuery = '(min-width: 768px)';
+
 export default function About() {
+  const [videoSrc, setVideoSrc] = useState(() =>
+    window.matchMedia(desktopVideoQuery).matches ? desktopVideoSrc : mobileVideoSrc
+  );
   const { ref: sectionRef, isVisible } = useScrollAnimation<HTMLElement>();
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(desktopVideoQuery);
+    const updateVideoSrc = () => {
+      setVideoSrc(mediaQuery.matches ? desktopVideoSrc : mobileVideoSrc);
+    };
+
+    updateVideoSrc();
+    mediaQuery.addEventListener('change', updateVideoSrc);
+
+    return () => mediaQuery.removeEventListener('change', updateVideoSrc);
+  }, []);
 
   return (
     <section
@@ -57,6 +77,7 @@ export default function About() {
           >
             <div className="relative h-[56vh] w-full overflow-hidden border-y border-white/10 bg-black md:min-h-screen md:border-y-0 md:border-l md:shadow-lift">
               <video
+                key={videoSrc}
                 className="h-full w-full object-contain"
                 autoPlay
                 muted
@@ -66,7 +87,7 @@ export default function About() {
                 poster="/images/about/shop-chair-wide.jpg"
                 aria-label="Cherry's Barbershop video montage"
               >
-                <source src="/videos/cherrys-barber-ad.mp4" type="video/mp4" />
+                <source src={videoSrc} type="video/mp4" />
               </video>
 
               <div className="absolute -bottom-4 -right-4 -z-10 hidden h-24 w-24 border-2 border-cherry md:block" />
