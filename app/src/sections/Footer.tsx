@@ -41,10 +41,10 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-noir-pure border-t border-white/10">
-      <div className="w-full section-padding py-16">
+      <div className="w-full section-padding py-12">
         <div className="max-w-7xl mx-auto">
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
             {/* Brand */}
             <div className="lg:col-span-1">
               <a
@@ -164,9 +164,25 @@ export default function Footer() {
 
           {/* Bottom Bar */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="font-mono text-xs text-white/40">
-              © {new Date().getFullYear()} {businessInfo.name}. All rights reserved.
-            </p>
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
+              <p className="font-mono text-xs text-white/40">
+                &copy; {new Date().getFullYear()} {businessInfo.name}. All rights reserved.
+              </p>
+              <a
+                href="https://www.SteinDigital.ca"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 font-mono text-[11px] text-white/35 hover:text-cherry transition-colors duration-200"
+                aria-label="Developed and managed by Stein Digital"
+              >
+                <img
+                  src="/images/stein-digital-logo.png"
+                  alt=""
+                  className="h-4 w-auto opacity-60 transition-opacity duration-200 group-hover:opacity-90"
+                />
+                <span>Developed &amp; Managed by Stein Digital</span>
+              </a>
+            </div>
             <p className="font-mono text-xs text-white/40">
               323 St George St, Moncton NB
             </p>
