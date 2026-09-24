@@ -1,10 +1,9 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { services } from '@/data';
-import { useBooking } from '@/context/BookingContext';
+import BookingLink from '@/components/BookingLink';
 
 export default function Services() {
   const { ref: sectionRef, isVisible } = useScrollAnimation<HTMLElement>();
-  const { openBooking } = useBooking();
 
   return (
     <section
@@ -83,14 +82,10 @@ export default function Services() {
             transitionTimingFunction: 'var(--ease-sharp)',
           }}
         >
-          <button
-            type="button"
-            className="btn-primary inline-flex items-center gap-2"
-            onClick={openBooking}
-          >
+          <BookingLink className="btn-primary inline-flex items-center gap-2">
             BOOK NOW
             <span className="text-lg">→</span>
-          </button>
+          </BookingLink>
         </div>
       </div>
     </section>

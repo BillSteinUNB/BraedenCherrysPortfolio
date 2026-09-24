@@ -1,42 +1,10 @@
-import { BookingProvider } from '@/context/BookingContext';
-import Navigation from '@/sections/Navigation';
-import Hero from '@/sections/Hero';
-import Gallery from '@/sections/Gallery';
-import Services from '@/sections/Services';
-import BookingModal from '@/sections/BookingModal';
-import Shop from '@/sections/Shop';
-import About from '@/sections/About';
-import Contact from '@/sections/Contact';
-import Footer from '@/sections/Footer';
+import { lazy, Suspense } from 'react';
+import BookingPage from '@/sections/BookingPage';
 
-function App() {
-  return (
-    <BookingProvider>
-      <div className="relative min-h-screen bg-noir-rich overflow-x-hidden">
-        {/* Grain Overlay */}
-        <div className="grain-overlay" />
+// Keep the gallery, product catalogue and home-page effects out of the booking bundle.
+const Home = lazy(() => import('./Home'));
 
-        {/* Navigation */}
-        <Navigation />
-
-        {/* Main Content */}
-        <main>
-          <Hero />
-          <Services />
-          <Gallery />
-          <Shop />
-          <About />
-          <Contact />
-        </main>
-
-        {/* Footer */}
-        <Footer />
-
-        {/* Modals */}
-        <BookingModal />
-      </div>
-    </BookingProvider>
-  );
+export default function App() {
+  if (window.location.pathname.replace(/\/$/, '') === '/book') return <BookingPage />;
+  return <Suspense fallback={<main className="min-h-screen bg-noir-rich" aria-label="Loading Cherry’s Barbershop" />}><Home /></Suspense>;
 }
-
-export default App;

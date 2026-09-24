@@ -7,5 +7,17 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/book",
+      "destination": "https://getsqr.co/braeden-taylor-3",
+      "permanent": false
+    },
+    {
+      "source": "/book/",
+      "destination": "https://getsqr.co/braeden-taylor-3",
+      "permanent": false
+    }
   ]
 }

@@ -1,3 +1,4 @@
+import { BOOKING_PATH } from '@/lib/booking';
 import type { Product, Service, GalleryItem, TeamMember, BusinessHours } from '@/types';
 
 export const products: Product[] = [
@@ -215,6 +216,6 @@ export const businessInfo = {
   phone: '(639) 414-2877',
   email: 'braeden@cherrysbarber.com',
   instagram: 'https://instagram.com/brae.blades',
-  bookingUrl: 'https://www.vagaro.com/cherrysbarber',
-  shopUrl: 'https://www.vagaro.com/cherrysbarber',
+  bookingUrl: BOOKING_PATH,
+  shopUrl: '/#shop',
 };

@@ -1,11 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import { MapPin, Clock, Phone, ChevronDown } from 'lucide-react';
-import { useBooking } from '@/context/BookingContext';
+import BookingLink from '@/components/BookingLink';
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
-  const { openBooking } = useBooking();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
@@ -118,14 +117,10 @@ export default function Hero() {
             }`}
             style={{ transitionDelay: '0.9s', transitionTimingFunction: 'var(--ease-sharp)' }}
           >
-            <button
-              type="button"
-              className="btn-primary inline-flex items-center gap-2"
-              onClick={openBooking}
-            >
+            <BookingLink className="btn-primary inline-flex items-center gap-2">
               BOOK YOUR CUT
               <span className="text-lg">→</span>
-            </button>
+            </BookingLink>
             <button
               className="btn-outline inline-flex items-center gap-2"
               onClick={scrollToShop}

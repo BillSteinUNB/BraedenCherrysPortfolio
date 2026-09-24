@@ -1,11 +1,11 @@
 import { Instagram, Facebook } from 'lucide-react';
 import { businessInfo } from '@/data';
-import { useBooking } from '@/context/BookingContext';
+import { BOOKING_PATH } from '@/lib/booking';
 
 const quickLinks = [
   { name: 'Gallery', href: '#gallery' },
   { name: 'Services', href: '#services' },
-  { name: 'Book Now', href: '#booking' },
+  { name: 'Book Now', href: BOOKING_PATH },
   { name: 'About', href: '#about' },
 ];
 
@@ -23,14 +23,7 @@ const contactLinks = [
 ];
 
 export default function Footer() {
-  const { openBooking } = useBooking();
-
   const scrollToSection = (href: string) => {
-    if (href === '#booking') {
-      openBooking();
-      return;
-    }
-
     if (href.startsWith('#')) {
       const element = document.querySelector(href);
       if (element) {
@@ -106,12 +99,9 @@ export default function Footer() {
               <ul className="space-y-3">
                 {quickLinks.map((link) => (
                   <li key={link.name}>
-                    <button
-                      onClick={() => scrollToSection(link.href)}
-                      className="font-body text-white/60 hover:text-cherry transition-colors duration-200"
-                    >
+                    <a href={link.href} className="inline-flex min-h-11 items-center font-body text-white/60 hover:text-cherry transition-colors duration-200">
                       {link.name}
-                    </button>
+                    </a>
                   </li>
                 ))}
               </ul>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { useBooking } from '@/context/BookingContext';
+import BookingLink from '@/components/BookingLink';
 
 const navLinks = [
   { name: 'GALLERY', href: '#gallery' },
@@ -12,7 +12,6 @@ const navLinks = [
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { openBooking } = useBooking();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,20 +69,18 @@ export default function Navigation() {
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-4">
-              {/* Book Button - Desktop & Mobile */}
-              <button
-                type="button"
-                className="btn-primary text-sm tracking-wide px-4 py-2 sm:px-8 sm:py-4"
-                onClick={openBooking}
-              >
+              {/* Desktop booking; mobile has a persistent bottom action */}
+              <BookingLink className="btn-primary hidden md:inline-flex text-sm tracking-wide px-4 py-2 sm:px-8 sm:py-4">
                 BOOK NOW
-              </button>
+              </BookingLink>
 
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="md:hidden p-3 text-white min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label="Toggle menu"
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-navigation"
               >
                 {isMobileMenuOpen ? (
                   <X className="w-6 h-6" />
@@ -98,6 +95,8 @@ export default function Navigation() {
 
       {/* Mobile Menu Overlay */}
       <div
+        id="mobile-navigation"
+        inert={!isMobileMenuOpen}
         className={`fixed inset-0 z-40 bg-noir-rich transition-all duration-500 md:hidden ${
           isMobileMenuOpen
             ? 'opacity-100 pointer-events-auto'
@@ -119,16 +118,9 @@ export default function Navigation() {
               {link.name}
             </button>
           ))}
-          <button
-            type="button"
-            className="btn-primary mt-8 text-lg"
-            onClick={() => {
-              setIsMobileMenuOpen(false);
-              openBooking();
-            }}
-          >
+          <BookingLink className="btn-primary mt-8 text-lg" onClick={() => setIsMobileMenuOpen(false)}>
             BOOK NOW
-          </button>
+          </BookingLink>
         </div>
       </div>
     </>

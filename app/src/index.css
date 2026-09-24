@@ -232,77 +232,11 @@
     transform: translateY(0);
   }
 
-  /* Vagaro Booking Widget */
-  .vagaro-widget-frame {
-    min-height: 0;
-    position: relative;
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.04),
-      0 20px 60px rgba(0, 0, 0, 0.5),
-      0 0 80px rgba(196, 30, 58, 0.06);
-  }
-  
-  .vagaro-widget-container {
-    position: relative;
-    z-index: 1;
-    min-height: 0;
-  }
-  
-  /* Hide the loading state once the widget iframe appears */
-  .vagaro-widget-container:has(iframe) + .vagaro-widget-loading {
-    opacity: 0;
-    pointer-events: none;
-  }
-  
-  /*
-   * Vagaro's booking document only paints the flow at the top of the frame. Forcing the iframe to
-   * height: 100% of a full-screen dialog stretches the iframe element to ~90vh while the interior
-   * stays short, so users see a large empty white region inside the frame (not a loading failure).
-   * Use a tall but bounded height so steps like calendar/staff still fit; scroll remains inside the iframe.
-   */
-  .vagaro-widget-container iframe {
-    width: 100% !important;
-    min-height: 480px;
-    height: min(78vh, 820px) !important;
-    border: none;
-    display: block;
-  }
-  
-  /* Hide the default frameTitle since we have our own header */
-  .vagaro-widget-container #frameTitle {
-    display: none;
-  }
-  
-  /* Subtle the Vagaro attribution links */
-  .vagaro-widget-container .vagaro {
-    padding: 12px 0 !important;
-    background: #f8f8f8;
-    border-top: 1px solid #eee;
-  }
+  .mobile-booking-bar { padding-bottom: max(12px, env(safe-area-inset-bottom)); }
 }
 
-@keyframes booking-modal-in {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0) scale(0.985);
-    filter: blur(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-    filter: blur(0);
-  }
-}
-
-.animate-slide-up-fade {
-  animation: booking-modal-in 520ms var(--ease-sharp) both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-slide-up-fade {
-    animation: none;
-  }
-}
+.booking-page { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding-top: 100px; padding-bottom: max(32px, env(safe-area-inset-bottom)); }
+a[href="/book"]:focus-visible, .booking-page a:focus-visible { outline: 2px solid #E63950; outline-offset: 4px; }
 
 @layer utilities {
   .tracking-tight {
