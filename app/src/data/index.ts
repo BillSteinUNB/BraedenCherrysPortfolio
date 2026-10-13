@@ -199,13 +199,13 @@ export const teamMembers: TeamMember[] = [
 ];
 
 export const businessHours: BusinessHours[] = [
-  { day: 'Monday', hours: '10:00 AM - 6:00 PM', isOpen: true },
-  { day: 'Tuesday', hours: '10:00 AM - 6:00 PM', isOpen: true },
-  { day: 'Wednesday', hours: '10:00 AM - 6:00 PM', isOpen: true },
-  { day: 'Thursday', hours: '10:00 AM - 6:00 PM', isOpen: true },
-  { day: 'Friday', hours: '10:00 AM - 6:00 PM', isOpen: true },
-  { day: 'Saturday', hours: '10:00 AM - 6:00 PM', isOpen: true },
-  { day: 'Sunday', hours: 'CLOSED', isOpen: false },
+  { day: 'Monday', hours: 'CLOSED', isOpen: false },
+  { day: 'Tuesday', hours: '10:00 AM - 7:00 PM', isOpen: true },
+  { day: 'Wednesday', hours: '10:00 AM - 7:00 PM', isOpen: true },
+  { day: 'Thursday', hours: '10:00 AM - 7:00 PM', isOpen: true },
+  { day: 'Friday', hours: '10:00 AM - 7:00 PM', isOpen: true },
+  { day: 'Saturday', hours: '10:00 AM - 7:00 PM', isOpen: true },
+  { day: 'Sunday', hours: '10:00 AM - 7:00 PM', isOpen: true },
 ];
 
 export const businessInfo = {

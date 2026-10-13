@@ -16,8 +16,11 @@ export default function Contact() {
     : `https://maps.google.com/?q=${mapQuery}`;
 
   const getTodayHours = () => {
-    const today = new Date().getDay();
-    return businessHours[today];
+    const day = new Intl.DateTimeFormat('en-CA', {
+      weekday: 'long',
+      timeZone: 'America/Moncton',
+    }).format(new Date());
+    return businessHours.find((entry) => entry.day === day)!;
   };
 
   const today = getTodayHours();

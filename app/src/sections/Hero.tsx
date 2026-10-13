@@ -149,7 +149,7 @@ export default function Hero() {
             </div>
             <div className="flex items-center gap-2 text-white/70">
               <Clock className="w-4 h-4 text-cherry" />
-              <span className="font-mono text-sm tracking-wide">MON-SAT 10-6</span>
+              <span className="font-mono text-sm tracking-wide">TUE-SUN 10AM-7PM · MON CLOSED</span>
             </div>
             <div className="flex items-center gap-2 text-white/70">
               <Phone className="w-4 h-4 text-cherry" />
